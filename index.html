@@ -102,14 +102,17 @@
 
   <!-- Loading Screen Overlay -->
   <div id="loader-overlay">
-    <div class="loader-container">
-      <canvas id="loader-canvas"></canvas>
-      <div class="loader-brand">
-        <img src="assets/images/logo.png" alt="Aiden & Austin Watches" class="loader-logo-img">
-        <div class="loader-sub">Aiden & Austin</div>
+    <div class="loader-content-wrap">
+      <div class="loader-composition">
+        <canvas id="loader-canvas"></canvas>
+        <div class="loader-logo-wrap">
+          <img src="assets/images/logo.png" alt="Aiden & Austin Watches" class="loader-logo-img">
+          <div class="logo-shimmer"></div>
+        </div>
       </div>
+      <div class="loader-brand-name">Aiden &amp; Austin</div>
+      <div class="loader-progress" id="loader-percentage">00%</div>
     </div>
-    <div class="loader-progress" id="loader-percentage">00%</div>
   </div>
 
   <!-- Navigation Bar -->

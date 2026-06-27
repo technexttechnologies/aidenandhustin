@@ -1,7 +1,7 @@
 // Three.js 3D interlocking watch gear loading screen
 
 function initLoader(onCompleteCallback) {
-  const container = document.querySelector('.loader-container');
+  const container = document.querySelector('.loader-composition');
   const canvas = document.getElementById('loader-canvas');
   const percentEl = document.getElementById('loader-percentage');
   const overlayEl = document.getElementById('loader-overlay');
@@ -141,19 +141,19 @@ function initLoader(onCompleteCallback) {
   function animate() {
     animationFrameId = requestAnimationFrame(animate);
     
-    // Rotate gears (interlocking direction swaps)
-    gearCenter.rotation.z += 0.005;
-    gearLeft.rotation.z -= 0.009;
-    gearRight.rotation.z -= 0.0075;
+    // Rotate gears (interlocking direction swaps) - slower, premium speed
+    gearCenter.rotation.z += 0.003;
+    gearLeft.rotation.z -= 0.0054;
+    gearRight.rotation.z -= 0.0045;
     
     renderer.render(scene, camera);
   }
 
   // Set initial states
-  gsap.set(canvas, { opacity: 0, scale: 0.8 });
-  gsap.set('.loader-brand', { opacity: 0, y: 15 });
+  gsap.set(canvas, { opacity: 0, scale: 0.85 });
+  gsap.set('.loader-logo-wrap', { opacity: 0, scale: 0.85 });
   gsap.set('.loader-logo-img', { filter: 'drop-shadow(0 0 0px rgba(201, 169, 110, 0))' });
-  gsap.set('.loader-sub', { opacity: 0, y: 10 });
+  gsap.set('.loader-brand-name', { opacity: 0, y: 15 });
   gsap.set(percentEl, { opacity: 0 });
 
   animate();
@@ -163,10 +163,10 @@ function initLoader(onCompleteCallback) {
     onComplete: startLoading
   });
 
-  // 1. Matte black background (default CSS) -> Premium logo reveal
-  entryTl.to('.loader-brand', {
+  // 1. Premium logo reveal with luxury fade-in
+  entryTl.to('.loader-logo-wrap', {
     opacity: 1,
-    y: 0,
+    scale: 1,
     duration: 1.2,
     ease: 'power3.out'
   });
@@ -231,8 +231,8 @@ function initLoader(onCompleteCallback) {
       }
     });
 
-    // 5. Elegant text reveal for subtitle
-    exitTl.to('.loader-sub', {
+    // 5. Elegant text reveal for brand name
+    exitTl.to('.loader-brand-name', {
       opacity: 1,
       y: 0,
       duration: 1.0,
@@ -265,8 +265,8 @@ function simulateLoading(callback) {
   const overlayEl = document.getElementById('loader-overlay');
   let progress = 0;
   
-  gsap.set('.loader-brand', { opacity: 0, y: 15 });
-  gsap.set('.loader-sub', { opacity: 0, y: 10 });
+  gsap.set('.loader-logo-wrap', { opacity: 0, scale: 0.85 });
+  gsap.set('.loader-brand-name', { opacity: 0, y: 15 });
   gsap.set(percentEl, { opacity: 0 });
 
   const entryTl = gsap.timeline({
@@ -285,7 +285,7 @@ function simulateLoading(callback) {
             }
           });
 
-          exitTl.to('.loader-sub', { opacity: 1, y: 0, duration: 0.8 });
+          exitTl.to('.loader-brand-name', { opacity: 1, y: 0, duration: 0.8 });
           exitTl.to({}, { duration: 0.4 });
           exitTl.to(overlayEl, {
             opacity: 0,
@@ -299,7 +299,7 @@ function simulateLoading(callback) {
     }
   });
 
-  entryTl.to('.loader-brand', { opacity: 1, y: 0, duration: 1.0 });
+  entryTl.to('.loader-logo-wrap', { opacity: 1, scale: 1, duration: 1.0 });
   entryTl.to(percentEl, { opacity: 0.7, duration: 0.6 }, '-=0.4');
 }
 
